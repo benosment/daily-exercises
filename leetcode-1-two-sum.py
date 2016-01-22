@@ -21,13 +21,36 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        for (i, val1) in enumerate(nums):
-            for (j, val2) in enumerate(nums[i+1:]):
-                if val1 + val2 == target:
-                    return [i + 1, i + j + 2]
+        reverse_hash = {}
+        for (i, val) in enumerate(nums):
+            try:
+                current_val = reverse_hash[val]
+                if type(current_val) == list:
+                    current_val.append(i)
+                else:
+                    l = [current_val]
+                    l.append(i)
+                    reverse_hash[val] = l
+            except:
+                reverse_hash[val] = i
+
+        for (i, val) in enumerate(nums):
+            need = target - val
+            try:
+                found_index = reverse_hash[need]
+                if type(found_index) == list:
+                    for j in found_index:
+                        if j > i:
+                            return [i+1, j+1]
+                elif found_index > i:
+                    return [i+1, found_index+1]
+            except:
+                pass
+
         return None
 
 
 if __name__ == '__main__':
     s = Solution()
-    print(s.twoSum([2,7,11,15], 9))
+    #print(s.twoSum([2,7,11,15], 9))
+    print(s.twoSum([0,4,3,0], 0))
