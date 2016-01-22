@@ -14,6 +14,8 @@ You may assume that each input would have exactly one solution.
 Input: numbers={2, 7, 11, 15}, target=9 Output: index1=1, index2=2
 '''
 
+# could do it with one loop
+
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -21,33 +23,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        reverse_hash = {}
-        for (i, val) in enumerate(nums):
-            try:
-                current_val = reverse_hash[val]
-                if type(current_val) == list:
-                    current_val.append(i)
-                else:
-                    l = [current_val]
-                    l.append(i)
-                    reverse_hash[val] = l
-            except:
-                reverse_hash[val] = i
-
+        hashmap = {}
         for (i, val) in enumerate(nums):
             need = target - val
-            try:
-                found_index = reverse_hash[need]
-                if type(found_index) == list:
-                    for j in found_index:
-                        if j > i:
-                            return [i+1, j+1]
-                elif found_index > i:
-                    return [i+1, found_index+1]
-            except:
-                pass
-
-        return None
+            if need in hashmap:
+                return [hashmap[need] + 1, i + 1]
+            hashmap[val] = i
 
 
 if __name__ == '__main__':
