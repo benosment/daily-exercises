@@ -12,7 +12,7 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
-        add_one = False
+        carry = False
         answer = None
         head = None
         while l1 or l2:
@@ -22,13 +22,13 @@ class Solution(object):
                 val = l1.val
             else:
                 val = l2.val
-            if add_one:
+            if carry:
                 val += 1
             if val >= 10:
-                add_one = True
+                carry = True
                 val = val % 10
             else:
-                add_one = False
+                carry = False
 
             l = ListNode(val)
             if not answer:
@@ -42,7 +42,7 @@ class Solution(object):
             if l2:
                 l2 = l2.next
 
-        if add_one:
+        if carry:
             l = ListNode(1)
             head.next = l
             head = head.next
