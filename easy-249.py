@@ -20,6 +20,7 @@ def parse_args():
                         help='prices of a given stock')
     return parser.parse_args()
 
+
 def stock(stock_prices):
     buy_day = 0
     max_profit = 0
@@ -35,6 +36,7 @@ def stock(stock_prices):
                 max_sell = sell_day
     print("max profit: %.2f from buy on day %d at %.2f sell on day %d at %.2f" %
           (max_profit, max_buy, stock_prices[max_buy], max_sell, stock_prices[max_sell]))
+
 
 if __name__ == '__main__':
     args = parse_args()
