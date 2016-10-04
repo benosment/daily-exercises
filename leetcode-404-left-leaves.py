@@ -15,9 +15,9 @@ class Solution(object):
         return self.sum_left_leaves_helper(root, False)
 
     def sum_left_leaves_helper(self, node, left_child):
-        if node == None:
+        if node is None:
             return 0
-        if node.right == None and node.left == None:
+        if node.right is None and node.left is None:
             if left_child:
                 return node.val
             else:
